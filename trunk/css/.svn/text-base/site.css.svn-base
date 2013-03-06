@@ -1,0 +1,160 @@
+.login
+{
+    text-align:center;
+}
+textarea{
+
+	width:700px;
+}
+.alert.alert-error
+{
+    border-radius:10px;
+}
+
+.alert.alert-error.reg
+{
+	border-radius:10px;
+	width:30px;
+}
+.btn.login
+{
+    color:#000000;
+}
+
+.table.table-bordered.emergency
+{
+    width:300px;
+}
+
+.table.table-bordered.insurance
+{
+    width:500px;
+}
+
+.table.table-bordered.basicinfo
+{
+    width:500px;
+}
+
+.table.table-bordered.additional
+{
+    width:1000px;
+}
+
+.table.table-bordered.notes
+{
+    width:1000px;
+}
+
+.btn.main
+{    
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.table.rounding
+{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn.otherButton
+{
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    width:268px;
+}
+
+.btn.medButton
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:968px;
+}
+
+.btn.insuranceButton
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:468px;
+}
+
+.btn.basicButton
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:468px;
+}
+
+.btn.notesButton
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:968px;
+}
+
+.btn.btncorner
+{
+    border-top-left-radius: 5px;
+}
+
+.oneSpan
+{
+    
+    width:100px;
+}
+
+.twoSpan
+{
+    width:200px;
+}
+
+.threeSpan
+{
+    width:300px;
+}
+
+.fourSpan
+{
+    width:400px;
+}
+
+.fiveSpan
+{
+    width:500px;
+}
+
+.sixSpan
+{
+    width:600px;
+}
+
+.sevenSpan
+{
+    width:700px;
+}
+
+.eightSpan
+{
+    width:800px;
+}
+
+.nineSpan
+{
+    width:900px;
+}
+
+.tenSpan
+{
+    width:1000px;
+}
+
+.elevenSpan
+{
+    width:1100px;
+}
+
+.twelveSpan
+{
+    width:1200px;
+}

@@ -1,0 +1,152 @@
+.login
+{
+    text-align:center;
+}
+textarea{
+
+	width:700px;
+}
+.alert.alert-error
+{
+    border-radius:10px;
+}
+
+.alert.alert-error.reg
+{
+	border-radius:10px;
+	width:30px;
+}
+.btn.login
+{
+    color:#000000;
+}
+
+.table.table-bordered.basicinfo
+{
+    width:500px;
+}
+
+.table.table-bordered.additional
+{
+    width:600px;
+}
+
+.table.table-bordered.notes
+{
+    width:1000px;
+}
+
+.btn.main
+{    
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.table.rounding
+{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn.dropDownMed
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:568px;
+}
+
+.btn.dropDownBasic
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:468px;
+}
+
+.btn.dropNotes
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width:968px;
+}
+
+.btn.btncorner
+{
+    border-top-left-radius: 5px;
+}
+
+.oneSpan
+{
+    
+    width:70px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.twoSpan
+{
+    width:170px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.threeSpan
+{
+    width:270px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.fourSpan
+{
+    width:400px;
+}
+
+.fiveSpan
+{
+    width:500px;
+}
+
+.sixSpan
+{
+    width:600px;
+}
+
+.sevenSpan
+{
+    width:700px;
+}
+
+.eightSpan
+{
+    width:770px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.nineSpan
+{
+    width:870px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.tenSpan
+{
+    width:970px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.elevenSpan
+{
+    width:1070px;
+    margin-left:15px;
+    mergin-right:15px;
+}
+
+.twelveSpan
+{
+    width:1170px;
+    margin-left:15px;
+    mergin-right:15px;
+}

@@ -1,0 +1,261 @@
+#!/usr/bin/env python
+import urllib
+import urllib2
+import hashlib
+import json
+import re
+import webbrowser
+import os
+
+"""
+@author John Powers <powers96@students.rowan.edu>
+
+This python script is used to synch the local health summary page with the one on the server.
+Also in this directory is info.json, template.html and summaryPage.html.
+
+info.json is a json representation of all the user's information from the database stored locally.
+
+This local json is hashed, then the script checks the hash of the json representation on the server by
+sending a GET request to pagehash.php with the unique id of the user as a parameter.
+
+If both hashes are the same, then the local copy is in synch with the server copy.
+
+If the hashes are different, the script retrieves the new json from the server by sending a GET request to
+synch.php.  It then writes this new json to info.json.
+
+To put this information into the summary page, template.html has variable placeholders throughout it.
+The script uses a regular expression to replace these placeholders with the values from info.json and
+then writes the result to summaryPage.php
+
+"""
+
+id = 113 #Unique Id to identify the user
+host = "http://205.134.224.208/~elster5/Group3Project" #Host name of the server, omit the trailing /
+
+#If the hashes don't match, synch is called to
+#update the local copies of info.json and summaryPage.php
+def synch():
+    global id
+    global host
+    
+    req = urllib2.Request("%s/synch.php?id=%s" %(host, id))
+    res = urllib2.urlopen(req)
+    serverInfo = res.read()
+    localInfo = open('info.json', 'w')
+    localInfo.write(serverInfo)
+    localInfo.close()
+    writeToSummaryPage()
+
+#Returns a string of the contents of template.html
+def getTemplatePage():
+    templatePage = open('template.html', 'r')
+    templatePage = templatePage.read()
+    return templatePage
+
+#Writes whatever is in param newPageInfo to summaryPage.html
+def writeNewPage(newPageInfo):
+    templatePage = open('summaryPage.html', 'w')
+    templatePage = templatePage.write(newPageInfo)
+
+#Returns a string of the contents of info.json
+def getLocalInfo():
+    localInfo = open('info.json', 'r')
+    localInfo = localInfo.read()
+    return localInfo    
+
+#Handles replacing template.html variable placeholdes and writing the result to summaryPage.html
+def writeToSummaryPage():
+    localInfo = getLocalInfo()
+    localInfo = json.loads(localInfo)
+    templatePage = getTemplatePage()
+    firstName = localInfo['firstName']
+    lastName = localInfo['lastName']
+    address = localInfo['address']
+    zipCode = localInfo['zip']
+    city = localInfo['city']
+    state = localInfo['state']
+    insCompany = localInfo['insCompany']
+    insCompanyAddress = localInfo['insCompanyAddress']
+    groupNumber = localInfo['groupNumber']
+    policyNumber = localInfo['policyNumber']
+    dob = localInfo['dob']
+    ss = localInfo['ss']
+    contact = localInfo['contact']
+    contactNumber = localInfo['contactNumber']
+    familyHis = localInfo['familyHistory']
+    inactiveDiagnose = localInfo['inactiveDiagnose']
+    activeDiagnose = localInfo['activeDiagnose']
+    emergencyName = localInfo['emergencyName']
+    emergencyPhone = localInfo['emergencyPhone']
+    emergencyRelation = localInfo['emergencyRelation']
+    phoneHome = localInfo['phoneHome']
+    phoneCell = localInfo['phoneCell']
+    phoneWork = localInfo['phoneWork']
+    picture = localInfo['picture']
+    allergies = localInfo['allergies']
+    
+    
+    if firstName:
+        templatePage = re.sub(r'\{firstName\}', firstName, templatePage)
+    else:
+        templatePage = re.sub(r'\{firstName\}', 'None Listed', templatePage)
+        
+    if lastName:
+        templatePage = re.sub(r'\{lastName\}', lastName, templatePage)
+    else:
+        templatePage = re.sub(r'\{lastName\}', lastName, templatePage)
+        
+    if address:
+        templatePage = re.sub(r'\{address\}', address, templatePage)
+    else:
+       templatePage = re.sub(r'\{address\}', 'None Listed', templatePage)
+    
+    if city:
+        templatePage = re.sub(r'\{city\}', city, templatePage)
+    else:
+       templatePage = re.sub(r'\{city\}', 'None Listed', templatePage)
+       
+    if zipCode:
+        templatePage = re.sub(r'\{zip\}', zipCode, templatePage)
+    else:
+        templatePage = re.sub(r'\{zip\}', 'None Listed', templatePage)
+    if state:
+        templatePage = re.sub(r'\{state\}', state, templatePage)
+    else:
+        templatePage = re.sub(r'\{state\}', 'None Listed', templatePage)
+    
+    if insCompany:
+        templatePage = re.sub(r'\{insCompany\}', insCompany, templatePage)
+    else:
+        templatePage = re.sub(r'\{insCompany\}', 'None Listed', templatePage)
+    
+    if insCompanyAddress:
+        templatePage = re.sub(r'\{insCompanyAddress\}', insCompanyAddress, templatePage)
+    else:
+        templatePage = re.sub(r'\{insCompanyAddress\}', 'None Listed', templatePage)
+    
+    if groupNumber:
+        templatePage = re.sub(r'\{groupNumber\}', groupNumber, templatePage)
+    else:
+        templatePage = re.sub(r'\{groupNumber\}', 'None Listed', templatePage)
+        
+    if policyNumber:
+        templatePage = re.sub(r'\{policyNumber\}', policyNumber, templatePage)
+    else:
+        templatePage = re.sub(r'\{policyNumber\}', 'None Listed', templatePage)
+        
+    if dob:
+        templatePage = re.sub(r'\{dob\}', dob, templatePage)
+    else:
+        templatePage = re.sub(r'\{dob\}', 'None Listed', templatePage)
+    
+    if ss:
+        templatePage = re.sub(r'\{ss\}', ss, templatePage)
+    else:
+        templatePage = re.sub(r'\{ss\}', 'None Listed', templatePage)
+        
+    if contact:
+        templatePage = re.sub(r'\{contact\}', contact, templatePage)
+    else:
+        templatePage = re.sub(r'\{contact\}', 'None Listed', templatePage)
+        
+    if contactNumber:
+        templatePage = re.sub(r'\{contactNumber\}', policyNumber, templatePage)
+    else:
+        templatePage = re.sub(r'\{contactNumber\}', 'None Listed', templatePage)
+    
+    if familyHis:
+        templatePage = re.sub(r'\{familyHis\}', familyHis, templatePage)
+    else:
+        templatePage = re.sub(r'\{familyHis\}', 'None Listed', templatePage)
+        
+    if activeDiagnose:
+        templatePage = re.sub(r'\{activeDiagnose\}', activeDiagnose, templatePage)
+    else:
+        templatePage = re.sub(r'\{activeDiagnose\}', 'None Listed', templatePage)
+    
+    if inactiveDiagnose:
+        templatePage = re.sub(r'\{inactiveDiagnose\}', inactiveDiagnose, templatePage)
+    else:
+        templatePage = re.sub(r'\{inactiveDiagnose\}', 'None Listed', templatePage)
+        
+    if emergencyName:
+        templatePage = re.sub(r'\{emergencyName\}', emergencyName, templatePage)
+    else:
+        templatePage = re.sub(r'\{emergencyName\}', 'None Listed', templatePage)
+        
+    if emergencyPhone:
+        templatePage = re.sub(r'\{emergencyPhone\}', emergencyPhone, templatePage)
+    else:
+        templatePage = re.sub(r'\{emergencyPhone\}', 'None Listed', templatePage)
+        
+    if emergencyRelation:
+        templatePage = re.sub(r'\{emergencyRelation\}', emergencyRelation, templatePage)
+    else:
+        templatePage = re.sub(r'\{emergencyRelation\}', 'None Listed', templatePage)
+    
+    if phoneHome:
+        templatePage = re.sub(r'\{phoneHome\}', phoneHome, templatePage)
+    else:
+        templatePage = re.sub(r'\{phoneHome\}', 'None Listed', templatePage)
+        
+    if phoneCell:
+        templatePage = re.sub(r'\{phoneCell\}', phoneCell, templatePage)
+    else:
+        templatePage = re.sub(r'\{phoneCell\}', 'None Listed', templatePage)
+        
+    if phoneWork:
+        templatePage = re.sub(r'\{phoneWork\}', phoneWork, templatePage)
+    else:
+        templatePage = re.sub(r'\{phoneWork\}', 'None Listed', templatePage)
+    
+    if picture:
+        templatePage = re.sub(r'\{picture\}', picture, templatePage)
+    else:
+        templatePage = re.sub(r'\{picture\}', 'None Listed', templatePage)
+    
+    if allergies:
+        templatePage = re.sub(r'\{allergies\}', allergies, templatePage)
+    else:
+        templatePage = re.sub(r'\{allergies\}', 'None Listed', templatePage)
+        
+    openTemplate = open('summaryPage.html', 'w')
+    openTemplate.write(templatePage)
+    openTemplate.close()
+        
+def openPage():
+    path = os.getcwd()
+    os.startfile("%s/summaryPage.html" %path)
+    
+#Returns the hash of the users information from the server    
+def getServerHash():
+    global host
+    global id
+    
+    req = urllib2.Request("%s/pagehash.php?id=%s" %(host,id))
+    res = urllib2.urlopen(req)
+    serverHash = res.read()
+    return serverHash
+
+try:
+    serverHash = getServerHash()
+except:
+    print "Can't connect to server"
+    openPage()
+    quit()
+    
+localInfo = getLocalInfo()
+localHash = hashlib.md5(localInfo)
+localHash = localHash.hexdigest()
+
+print localHash
+print serverHash
+
+if localHash != serverHash:
+    print "synching"
+    synch()
+    openPage()
+else:
+    print "already synched"
+    openPage()
+
